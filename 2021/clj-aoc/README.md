@@ -1,6 +1,6 @@
 # clj-aoc
 
-FIXME: description
+A clojure implementation for the Advent of Code calendar.
 
 ## Installation
 
