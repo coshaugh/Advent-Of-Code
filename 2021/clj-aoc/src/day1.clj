@@ -45,7 +45,7 @@
 
 (defn run [part]
   (let [input (fIO/read-and-split-by-newline input-file-path)
-        data (util/parse-int-seq input)]
+        data (map util/parse-int input)]
     (case part
       1 (part-1 data)
       2 (part-2 data))))
