@@ -3,9 +3,6 @@
    [util :as util]
    [fileIO :as fIO]))
 
-;; swap for http request maybe idk..?
-(def input-file-path "../inputs/01.txt")
-
 ;; inserts specified number of nil's at front of a sequence
 (defn get-nil-padded-seq [data offset]
   (apply conj data (repeat offset nil)))
@@ -22,17 +19,12 @@
 (defn all-not-nil [data]
   (every? some? data))
 
-;; compare 2 element sequence. return true if second item larger.
-;; todo: not sure if theres a cleaner way since just destructuring 2 items to compare..?
-(defn bigger-than-previous? [[a b]]
-  (< a b))
-
 ;; PART - 1
 ;; How many measurements are larger than the previous measurement?
 (defn part-1 [data]
   (->> (generate-windows data 2)
        (filter all-not-nil)
-       (filter bigger-than-previous?)
+       (filter #(< (first %1) (second %1)))
        (count)))
 
 ;; PART - 2
@@ -43,7 +35,7 @@
        (map (partial reduce +))
        (part-1)))
 
-(defn run [part]
+(defn run [input-file-path part]
   (let [input (fIO/read-and-split-by-newline input-file-path)
         data (map util/parse-int input)]
     (case part
