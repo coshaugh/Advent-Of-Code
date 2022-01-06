@@ -32,9 +32,6 @@
       (first data)
       (get-rating target-fcn filtered-data (inc idx)))))
 
-(defn to-result [a b]
-  (* a b))
-
 ;; PART - 1
 ;; calculate power consumption by multiplying gamma and epsilon ratings
 ;; data is a list of list of strings

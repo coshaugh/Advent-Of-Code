@@ -20,22 +20,19 @@
       "up" (update accum "aim" - mag)
       "down" (update accum "aim" + mag))))
 
-(defn to-result [a b]
-  (* a b))
-
 ;; PART - 1
 ;; depth gets aliased to aim in light of the solution for part 2
 (defn part-1 [data]
   (let [{forward "forward"
          aim "aim"} (reduce apply-magnitude seed data)]
-    (to-result forward aim)))
+    (* forward aim)))
 
 ;; PART - 2
 ;; 
 (defn part-2 [data]
   (let [{forward "forward"
          depth "depth"} (reduce apply-magnitude seed data)]
-    (to-result forward depth)))
+    (* forward depth)))
 
 (defn run [input-file-path part]
   (let [input (fIO/read-and-split-by-newline input-file-path)
