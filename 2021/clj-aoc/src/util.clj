@@ -13,11 +13,9 @@
 (defn binary-seq-to-decimal [x]
   (Long/parseLong (str/join x) 2))
 
+;; still unsure if theres some other better way to achieve this
 (defn map-to-columns [fcn data]
-    (apply map (partial package-args-into-list fcn) data))
-
-(defn package-args-into-list [f & args]
-  (f args))
+  (apply map (fn [& args] fcn args) data))
 
 (defn get-nth-column [data idx]
   (map #(nth %1 idx nil) data))
