@@ -13,6 +13,9 @@
 (defn binary-seq-to-decimal [x]
   (Long/parseLong (str/join x) 2))
 
+(defn map-to-columns [fcn data]
+    (apply map (partial package-args-into-list fcn) data))
+
 (defn package-args-into-list [f & args]
   (f args))
 

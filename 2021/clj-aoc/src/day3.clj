@@ -11,12 +11,6 @@
 (defn collapse-column [column]
   (reduce accumulate-frequency 0 column))
 
-;; could maybe pull this out to abstract operation of mapping over list of list and 
-;; packaging up input to map function as a list
-;; this bit is a little hard to read for me
-(defn collapse-by-column [data]
-  (apply map (partial util/package-args-into-list collapse-column) data))
-
 (defn get-most-common [freq]
   (if (< freq 0) "0" "1"))
 
@@ -36,7 +30,7 @@
 ;; calculate power consumption by multiplying gamma and epsilon ratings
 ;; data is a list of list of strings
 (defn part-1 [data]
-  (let [collapsed-by-column (collapse-by-column data)
+  (let [collapsed-by-column (util/map-to-columns collapse-column data)
         gamma-bin (map get-most-common collapsed-by-column)
         epsilon-bin (map get-least-common collapsed-by-column)]
     (apply * (map util/binary-seq-to-decimal [gamma-bin epsilon-bin]))))
