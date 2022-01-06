@@ -8,8 +8,8 @@
 (defn accumulate-frequency [accum x]
   (+ accum (if (= x "1") 1 -1)))
 
-(defn collapse-column [column-rows]
-  (reduce accumulate-frequency 0 column-rows))
+(defn collapse-column [column]
+  (reduce accumulate-frequency 0 column))
 
 ;; could maybe pull this out to abstract operation of mapping over list of list and 
 ;; packaging up input to map function as a list
