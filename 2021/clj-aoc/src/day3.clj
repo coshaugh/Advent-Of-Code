@@ -1,6 +1,7 @@
-(ns day3)
-(require '[util :as util]
-         '[fileIO :as fIO])
+(ns day3
+  (:require
+   [util :as util]
+   [fileIO :as fIO]))
 
 ;; turns string binary digit into frequency
 ;; 1 => +1
@@ -10,6 +11,9 @@
 
 (defn collapse-column [column]
   (reduce accumulate-frequency 0 column))
+
+(defn collapse-columns [columns]
+  (map collapse-column columns))
 
 (defn get-most-common [freq]
   (if (< freq 0) "0" "1"))
@@ -30,7 +34,8 @@
 ;; calculate power consumption by multiplying gamma and epsilon ratings
 ;; data is a list of list of strings
 (defn part-1 [data]
-  (let [collapsed-by-column (util/map-to-columns collapse-column data)
+  (let [column-data (util/transpose data)
+        collapsed-by-column (collapse-columns column-data)
         gamma-bin (map get-most-common collapsed-by-column)
         epsilon-bin (map get-least-common collapsed-by-column)]
     (apply * (map util/binary-seq-to-decimal [gamma-bin epsilon-bin]))))
